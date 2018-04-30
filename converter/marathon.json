@@ -30,5 +30,13 @@
     "HAPROXY_GROUP": "external",
     "HAPROXY_0_VHOST": "universe-converter.mesosphere.com",
     "HAPROXY_0_REDIRECT_TO_HTTPS": "true"
-  }
+  },
+  "healthChecks" : [
+    {
+      "protocol" : "COMMAND",
+      "command" : {
+        "value": "curl -k -w %{http_code} -s -o /dev/null https://$HOST:$PORT/transform | grep 400 &> /dev/null"
+      }
+    }
+  ]
 }
